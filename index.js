@@ -41,7 +41,7 @@ class Game extends React.Component {
         squares: Array(9).fill(null)
       }],
       stepNumber: 0,
-      xIsNext: true
+      xIsNext: this.isXInitialPlayer()
     };
   }
   handleClick(i) {
@@ -66,6 +66,9 @@ class Game extends React.Component {
       xIsNext: (step % 2) ? false : true,
     });
   }
+  isXInitialPlayer(){
+    return Math.random()>=0.5 ? true : false;
+  }
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -83,8 +86,8 @@ class Game extends React.Component {
         'Game start';
       return (
         <li key={move}>
-            <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
-          </li>
+          <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+        </li>
       );
     });
     return (
